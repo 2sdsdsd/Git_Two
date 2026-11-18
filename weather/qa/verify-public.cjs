@@ -1,0 +1,24 @@
+const {chromium}=require('C:/Users/Yz/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs'),path=require('node:path');
+let browser;
+(async()=>{
+ browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:390,height:844},userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const url=fs.readFileSync(path.join(__dirname,'..','手机访问网址.txt'),'utf8').replace(/^\uFEFF/,'').trim();
+ const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
+ await page.waitForFunction(()=>typeof state!=='undefined'&&state.data&&document.querySelector('#weatherHero').getAttribute('aria-busy')==='false',null,{timeout:60000});
+ console.log('Public page:',response.status());
+ if(await page.title()!=='小刘同学的天气查询系统')throw new Error('Public page is not v2');
+ console.log(await page.evaluate(()=>({city:state.city.name,temperature:state.data.current.temperature_2m,proxy:state.service,protocol:location.protocol,scene:document.body.dataset.scene})));
+ const online=await page.request.get(url+'/api/search?name=Shangri-La');
+ const json=await online.json();console.log('Online city search:',online.status(),'results:',json.results?.length||0);
+ if(online.status()!==200||!json.results?.length)throw new Error('Online city search failed');
+ await page.locator('#shareBtn').click();
+ if(!(await page.locator('#shareUrl').inputValue()).startsWith(url))throw new Error('Public share URL incorrect');
+ await page.locator('#closeShareBtn').click();
+ await page.screenshot({path:__dirname+'/v2-public-iphone-real.png',fullPage:true});
+ if(errors.length)throw new Error(errors.join('\n'));
+ console.log('Public HTTPS, real weather, online city search and sharing: PASS');
+ await browser.close();
+})().catch(async error=>{console.error(error);if(browser)await browser.close();process.exitCode=1});

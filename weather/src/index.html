@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#f2f5f3">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="default">
+ <meta name="description" content="小刘同学的专属天气小屋：查询天气，收下一句关心，让整片天空随晴雨和风一起变化。">
+ <title>小刘同学的天气查询系统</title>
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231d6e60'/%3E%3Ccircle cx='32' cy='25' r='12' fill='%23f7ca76'/%3E%3Cpath d='M15 40a10 10 0 0 1 13-10 13 13 0 0 1 22 10z' fill='white'/%3E%3C/svg%3E">
+ <style>/*__CSS__*/
+ /*__PLAYFUL__*/</style>
+</head>
+<body data-scene="cloudy" data-night="false">
+ <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2-4.5-4.4 6.3-.9Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5 8a8 8 0 0 1 14-3l1 2M4 17l1 2a8 8 0 0 0 14-3"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2S5 11 5 15a7 7 0 0 0 14 0c0-4-7-13-7-13Z"/><path d="M8 15a4 4 0 0 0 4 4"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 7h11a3 3 0 1 0-3-3M2 12h17a3 3 0 1 1-3 3M4 17h6a2 2 0 1 1-2 2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4a4 4 0 0 1-8 0Z"/></symbol>
+  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M2 12a10 10 0 0 1 20 0H2Zm10 0v7a3 3 0 0 0 6 0M12 2V1"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="14" cy="3" r="2"/><path d="m9 22 3-7-2-5m7 12-3-8 1-7-4 1-4 5m8-5 3 4h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 14 4-4M8 16l-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m2 10a4 4 0 0 0 6 0l5-5a4 4 0 0 0-6-6l-2 2" transform="translate(2 0) scale(.85)"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ </defs></svg>
+ <div class="ambient" aria-hidden="true"></div>
+ <canvas id="weatherCanvas" class="weather-canvas" aria-hidden="true"></canvas>
+ <div class="sky-stickers" aria-hidden="true"><span class="sticker-star star-a">✦</span><span class="sticker-star star-b">✧</span><span class="sticker-heart">♡</span><span class="sticker-spark">✳</span></div>
+ <div class="app-shell">
+  <header class="header">
+   <a href="#" class="brand" aria-label="小刘同学的天气查询系统首页"><span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="25" cy="13" r="8" fill="#ffd77e"/><path d="M7 29a8 8 0 0 1 10-10 10 10 0 0 1 18 10Z" fill="white"/><g fill="#836183"><circle cx="17" cy="25" r="1"/><circle cx="27" cy="25" r="1"/></g><path d="M20 27q2 3 4 0" stroke="#836183" fill="none" stroke-linecap="round"/></svg></span><span><strong>小刘同学的天气查询系统</strong><small>晴雨都在线，关心不打烊 ♡</small></span></a>
+   <nav class="nav" aria-label="页面导航"><a class="active" href="#today">今日天气</a><a href="#forecast">未来预报</a><a href="#life">生活指南</a></nav>
+   <div class="header-actions"><button class="motion-button" id="motionBtn" aria-pressed="true" aria-label="暂停背景动效">动效 ON</button><button class="header-share" id="shareBtn"><svg class="icon"><use href="#i-link"/></svg><span>分享天空</span></button></div>
+  </header>
+  <main>
+   <section class="intro"><div><div class="eyebrow"><span class="exclusive-pill">♡ 只给小刘同学</span> 今日份的天气与关心</div><h1>把天气装进口袋，<span>把关心送给你。</span></h1><p>晴天给你小太阳，雨天提醒你带伞。今天也要被好好照顾呀～</p></div><span id="calendar" class="calendar"></span></section>
+   <section class="toolbar" aria-label="查询城市">
+    <form id="searchForm" class="search-box" autocomplete="off"><svg class="icon"><use href="#i-search"/></svg><input type="search" id="cityInput" placeholder="小刘同学，今天想看哪里的天空？" aria-label="搜索城市或区县" aria-controls="searchResults" aria-expanded="false" maxlength="80"><button class="search-submit" type="submit">查天气 ✦</button><div id="searchResults" class="search-results" hidden></div></form>
+    <div class="quick-cities" id="quickCities" aria-label="热门城市"></div>
+    <button id="locationBtn" class="location-button"><svg class="icon"><use href="#i-pin"/></svg><span>我的位置</span></button>
+   </section>
+   <div id="statusBanner" class="status-banner" role="status" aria-live="polite" hidden></div>
+   <section class="overview-grid" id="today">
+    <article class="hero" id="weatherHero" aria-busy="true">
+     <div class="weather-scene" aria-hidden="true"><div class="sky-orb"><span class="orb-face"><i></i><i></i><b></b></span></div><div class="stars"></div><div class="scene-cloud cloud-one"><span class="cloud-face">ᴗ</span></div><div class="scene-cloud cloud-two"></div><div class="scene-cloud cloud-three"></div><div class="mountain mountain-back"></div><div class="mountain mountain-mid"></div><div class="mountain mountain-front"></div><div class="water-glow"></div><div class="scene-particles" id="sceneParticles"></div><div class="fog-bank"></div><div class="scene-lightning"></div><svg class="scene-birds" viewBox="0 0 100 30"><path d="M5 20q8-10 16 0m13-12q6-8 12 0m17 15q6-8 12 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><div class="hero-sticker">你的天气小精灵<br><strong>今日也在营业 ♡</strong></div><span class="hero-spark">✧</span></div>
+     <div class="hero-top"><div><div class="hero-kicker"><span class="live-dot"></span><span id="liveLabel">正在连接天气</span></div><h2 id="currentCity">杭州<span> / HANGZHOU</span></h2><p id="cityRegion">浙江 · 中国</p></div><button class="favorite-button" id="favoriteBtn" aria-label="收藏当前城市" aria-pressed="false"><svg class="icon"><use href="#i-star"/></svg></button></div>
+     <div class="hero-weather"><div class="temperature"><span id="temperature">--</span><span class="degree">°</span></div><div class="condition"><span id="weatherIcon" class="hero-weather-icon"></span><span id="weatherText">正在获取天气…</span></div><p class="feels-like" id="feelsLike">让每一天，都有晴朗的心情。</p><div class="temp-range" id="tempRange">今日最高 --° <span> / </span> 最低 --°</div></div>
+     <div class="hero-bottom"><span id="heroTip">风景随天气变化，心情由你来定。</span><button id="refreshBtn" aria-label="刷新天气"><svg class="icon"><use href="#i-refresh"/></svg><span id="updatedAt">等待更新</span></button></div>
+    </article>
+    <aside class="city-panel panel"><div class="section-heading"><h2>♡ 惦记的城市<span class="count" id="favoriteCount">0</span></h2><button class="small-button" id="addCityBtn" aria-label="添加城市"><svg class="icon"><use href="#i-plus"/></svg></button></div><p class="panel-description">小刘的城市收藏夹，装下每一份牵挂。</p><div id="favoriteCities" class="favorite-list"></div><div class="city-panel-footer"><span class="tiny-dot"></span>星星点一下，喜欢的城市就住下来啦</div></aside>
+   </section>
+   <section class="care-card" aria-live="polite" aria-atomic="true"><div class="care-mascot" aria-hidden="true"><svg viewBox="0 0 90 80"><circle cx="62" cy="24" r="18" fill="#ffda88"/><path d="M17 59a17 17 0 0 1 5-33 24 24 0 0 1 44 0 17 17 0 0 1 6 33Z" fill="white" stroke="#e4cfef" stroke-width="2"/><circle cx="35" cy="43" r="2.3" fill="#806488"/><circle cx="56" cy="43" r="2.3" fill="#806488"/><ellipse cx="29" cy="49" rx="5" ry="2.8" fill="#f5bad3"/><ellipse cx="62" cy="49" rx="5" ry="2.8" fill="#f5bad3"/><path d="M41 49q5 6 10 0" fill="none" stroke="#806488" stroke-width="2" stroke-linecap="round"/><path d="m8 13 3 4 4-3m60 53 3 4 4-3" stroke="#d6b4e5" stroke-width="2" fill="none"/></svg></div><div class="care-copy"><div class="care-heading"><span class="care-tag" id="careLabel">小刘同学专属 · 一句话的关心</span><span class="care-envelope" aria-hidden="true">💌</span></div><p id="careText">小刘同学，先选一座城市，让天气小精灵把今天的关心送给你吧～</p><div class="care-badges"><span id="weatherMood">☁ 等待天空来信</span><span id="windMood">🍃 风的消息也在路上</span></div></div><button id="careAgainBtn" class="care-again" disabled>再关心一句 ♡</button></section>
+   <section class="metrics" id="metrics" aria-label="当前天气指标"></section>
+   <section class="forecast-grid" id="forecast">
+    <article class="hourly-panel panel"><div class="section-heading"><h2>◷ 接下来 24 小时</h2><span class="subtle">温度小曲线 · °C</span></div><p class="panel-description" id="hourlySummary">正在加载逐小时预报</p><div class="hourly-scroll" id="hourlyScroll"><div class="hourly-inner" id="hourlyContent"><div class="placeholder">天空正在传来消息…</div></div></div></article>
+    <article class="daily-panel panel"><div class="section-heading"><h2>✦ 一周天气小手账</h2><span class="subtle">最低 / 最高</span></div><div id="dailyContent" class="daily-list"><div class="placeholder">正在获取未来天气…</div></div></article>
+   </section>
+   <section id="life" class="life-section"><div class="section-heading"><h2>✿ 小刘同学的今日生活锦囊</h2><span class="subtle">小细节，也要被温柔照顾</span></div><div id="lifeCards" class="life-grid"></div></section>
+  </main>
+  <footer><div><span class="footer-brand">小刘的天气小屋 ♡</span> <span>天气会变，关心一直在。</span></div><span>天气数据 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · 预报仅供参考 <span id="footerTime"></span></span></footer>
+ </div>
+ <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+ <dialog id="shareDialog"><div class="dialog-heading"><h2>把这片天空分享出去</h2><button id="closeShareBtn" aria-label="关闭">×</button></div><p id="shareDescription"></p><input id="shareUrl" readonly aria-label="分享网址"><button id="copyShareBtn" class="primary-button">复制网址</button><p class="dialog-note">安卓 Chrome / iPhone Safari 均可直接打开。<br>临时公网网址需要电脑与公网程序保持运行。</p></dialog>
+ <script>/*__CITIES__*/
+ /*__ATMOSPHERE__*/
+ /*__APP__*/</script>
+</body>
+</html>

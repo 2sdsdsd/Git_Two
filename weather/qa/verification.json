@@ -1,0 +1,13 @@
+{
+  "real": {
+    "city": "杭州",
+    "hasData": true,
+    "temp": 16.9,
+    "weather": "overcast",
+    "night": "true",
+    "status": "",
+    "service": true
+  },
+  "tests": "PASS",
+  "errors": []
+}

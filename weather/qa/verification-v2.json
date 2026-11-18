@@ -1,0 +1,82 @@
+{
+  "actual": {
+    "city": "杭州",
+    "temp": 16.8,
+    "weather": "阴",
+    "care": "小刘同学，杭州现在是阴天，天空盖上了云朵小被子，记得带好心情出门，对自己温柔一点呀～",
+    "service": true
+  },
+  "scenes": [
+    {
+      "scene": "sunny",
+      "kind": "none",
+      "particles": 0,
+      "wind": "calm",
+      "care": "小刘同学，杭州现在是晴天，记得做好防晒、及时喝水，把好心情和阳光一起装进口袋呀～"
+    },
+    {
+      "scene": "drizzle",
+      "kind": "rain",
+      "particles": 30,
+      "wind": "calm",
+      "care": "小刘同学，杭州现在有毛毛雨，毛毛雨也会打湿衣服，把折叠伞放进包里，出门就更安心啦～"
+    },
+    {
+      "scene": "lightRain",
+      "kind": "rain",
+      "particles": 65,
+      "wind": "calm",
+      "care": "小刘同学，杭州现在有小雨，小雨滴来串门啦，记得带伞，路上慢慢走，照顾好自己哦～"
+    },
+    {
+      "scene": "rain",
+      "kind": "rain",
+      "particles": 115,
+      "wind": "windy",
+      "care": "小刘同学，杭州现在有中雨，记得带伞、穿防水一点的鞋，路面湿滑，慢慢走也能到家呀～ 风也有点大，出门记得防风保暖哦。"
+    },
+    {
+      "scene": "heavyRain",
+      "kind": "rain",
+      "particles": 205,
+      "wind": "strong",
+      "care": "小刘同学，杭州现在有大雨，大雨滴正在开派对，尽量待在室内，必须出门时记得防雨并避开积水哦～ 现在风很强，注意远离广告牌等可能坠物的地方哦。"
+    },
+    {
+      "scene": "lightSnow",
+      "kind": "snow",
+      "particles": 42,
+      "wind": "breezy",
+      "care": "小刘同学，杭州现在有小雪，小雪轻轻落，厚外套记得穿，路上慢慢走，暖暖和和才最可爱呀～"
+    },
+    {
+      "scene": "snow",
+      "kind": "snow",
+      "particles": 80,
+      "wind": "breezy",
+      "care": "小刘同学，杭州现在有中雪，记得穿暖一点、穿防滑鞋，别忙着看雪忘了照顾自己呀～"
+    },
+    {
+      "scene": "heavySnow",
+      "kind": "snow",
+      "particles": 145,
+      "wind": "windy",
+      "care": "小刘同学，杭州现在有大雪，今天的雪有点认真，尽量待在暖和的室内，出门记得保暖并注意路面呀～ 风也有点大，出门记得防风保暖哦。"
+    },
+    {
+      "scene": "fog",
+      "kind": "none",
+      "particles": 0,
+      "wind": "calm",
+      "care": "小刘同学，杭州现在有雾，有雾时别着急赶路，留意路况，给自己多留一点出行时间呀～"
+    },
+    {
+      "scene": "thunder",
+      "kind": "rain",
+      "particles": 220,
+      "wind": "windy",
+      "care": "小刘同学，杭州现在有雷阵雨，雷雨正在敲大鼓，先躲进安全的室内，远离树下和积水，照顾好自己呀～ 风也有点大，出门记得防风保暖哦。"
+    }
+  ],
+  "tests": "PASS"
+}
